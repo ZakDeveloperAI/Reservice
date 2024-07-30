@@ -1,0 +1,1 @@
+const MASTER_URL='https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/'+process.env.NEXT_PUBLIC_MASTER_URL_KEY+'/master'
