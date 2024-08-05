@@ -22,6 +22,31 @@ const query=gql `
     return result
 }
 
+const getAllBusinessList=()=>{
+    const query=gql
+    `
+    query BusinessList {
+        businessLists {
+            about
+            address
+            category {
+                ... on Category {
+                id
+                name
+                }
+            }
+            contactPerson
+            email
+            images{
+                url
+            }
+            id
+            name
+        }
+    }
+    `
+}
+
 export default{
     getCategory
 }
