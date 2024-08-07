@@ -22,7 +22,7 @@ const query=gql `
     return result
 }
 
-const getAllBusinessList=()=>{
+const getAllBusinessList=async()=>{
     const query=gql
     `
     query BusinessList {
@@ -45,8 +45,11 @@ const getAllBusinessList=()=>{
         }
     }
     `
+    const result= await request(MASTER_URL,query)
+    return result;
 }
 
 export default{
-    getCategory
+    getCategory,
+    getAllBusinessList
 }
