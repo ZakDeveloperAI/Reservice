@@ -30,10 +30,8 @@ const getAllBusinessList=async()=>{
             about
             address
             category {
-                ... on Category {
                 id
                 name
-                }
             }
             contactPerson
             email
