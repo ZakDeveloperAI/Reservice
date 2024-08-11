@@ -1,4 +1,6 @@
+"use client"
 import { Button } from '@/components/ui/button'
+import { signIn, signOut } from 'next-auth/react'
 import Image from 'next/image'
 import React from 'react'
 
@@ -14,7 +16,7 @@ function Header() {
             </div>
         </div>
         <div>
-                <Button>Get Started</Button>
+                <Button  onClick={()=>signIn('descope') }>Get Started</Button>
         </div>
     </div>
   )
