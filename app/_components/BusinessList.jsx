@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 function BusinessList({ businessList = [], title }) {
@@ -9,7 +10,7 @@ function BusinessList({ businessList = [], title }) {
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5'>
         {businessList.length > 0 ? (
           businessList.map((business) => (
-            <div
+            <Link href={'/details/' + business.id}
               key={business.id || business.name} // Fallback to business.name if business.id doesn't exist
               className='shadow-md rounded-lg hover:shadow-2xl cursor-pointer hover:shadow-primary hover:scale-105 transition-all ease-in-out'
             >
@@ -29,7 +30,7 @@ function BusinessList({ businessList = [], title }) {
                 <h2 className='font-gra-500 text-sm'>{business.address || 'No address available'}</h2>
                 <Button className="rounded-lg mt-3">Prenota ora!</Button>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           [1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
