@@ -4,6 +4,15 @@ import { NotebookPen } from 'lucide-react'
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import BookingSection from './BookingSection';
 
 function SuggestedBusinessList({business}) {
 
@@ -25,9 +34,12 @@ function SuggestedBusinessList({business}) {
 
   return (
     <div className=''>
-      <Button className='flex gap-2 w-full'>
-        <NotebookPen/> BOOK APPOINTMENT
-      </Button>
+      
+      <BookingSection>
+        <Button className='flex gap-2 w-full'>
+          <NotebookPen/> BOOK APPOINTMENT
+        </Button>
+      </BookingSection>
       <div className='hidden md:block'>
       <h2 className='font-bold text-lg mt-3 mb-3'>Similiar Businesses</h2>
       <div>
