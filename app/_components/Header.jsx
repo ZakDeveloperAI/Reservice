@@ -18,7 +18,6 @@ function Header() {
   const {data}=useSession();
 
   useEffect(()=>{
-    console.log(data);
   },[data])
 
   return (

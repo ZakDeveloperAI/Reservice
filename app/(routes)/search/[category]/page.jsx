@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react';
 
 function BusinessByCategory({ params }) {
   const [businessList, setBusinessList] = useState([]); // Corretto il destructuring da array
-
   useEffect(() => {
     console.log(params);
     if (params) getBusinessList(); // Controllo per verificare se params è definito
