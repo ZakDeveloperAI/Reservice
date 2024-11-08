@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import {
     Sheet,
+    SheetClose,
     SheetContent,
     SheetDescription,
+    SheetFooter,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
@@ -13,6 +15,7 @@ function BookingSection({children}) {
   
   const [date, setDate] = useState(new Date());
   const [timeSlot, setTimeSlot] = useState([]);
+  const [selectedTime, setSelectedTime] = useState();
   useEffect(() => {
     getTime();
   },[])
@@ -38,7 +41,9 @@ function BookingSection({children}) {
     setTimeSlot(timeList)
   }
 
-
+  const saveBooking = () => {
+    //continue from here
+  }
     return (
     <div>
         <Sheet>
@@ -60,13 +65,30 @@ function BookingSection({children}) {
         <h2 className='my-5 font-bold'>Select Time Slot</h2>
         <div className='grid grid-cols-3 gap-3'>
             {timeSlot.map((item,index)=>(
-                <Button key={index}  variant='outline' className='border rounded-full p-2 px-3'>
+                <Button key={index}  variant='outline' 
+                className={`border rounded-full p-2 px-3 hover:bg-primary hover:text-white
+                ${selectedTime==item.time && 'bg-primary text-white'}`}
+                onClick={() => setSelectedTime(item.time)}
+                >
                     {item.time}
                 </Button>
             ))}
         </div>
+
       </SheetDescription>
     </SheetHeader>
+      <SheetFooter className="mt-5">
+        <SheetClose asChild>
+          <div className='flex gap-5'>
+          <Button variant='destructive'>Cancel</Button>
+
+          <Button disabled={!(selectedTime&&date)}
+          onClick={() => saveBooking()}
+          
+          >Book</Button>
+          </div>
+        </SheetClose>
+      </SheetFooter>
   </SheetContent>
 </Sheet>
     
