@@ -2,6 +2,7 @@ import { gql, request } from 'graphql-request'
 
 const MASTER_URL = 'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/' + process.env.NEXT_PUBLIC_MASTER_URL_KEY + '/master'
 
+
 const getCategory = async () => {
     const query = gql`
         query Category {
@@ -20,7 +21,7 @@ const getCategory = async () => {
 
     const result = await request(MASTER_URL, query)
     return result
-}
+};
 
 const getAllBusinessList = async () => {
     const query = gql`
@@ -44,7 +45,7 @@ const getAllBusinessList = async () => {
 
     const result = await request(MASTER_URL, query)
     return result
-}
+};
 
 const getBusinessByCategory = async (category) => {
     const query = gql`
@@ -68,7 +69,7 @@ const getBusinessByCategory = async (category) => {
 
     const result = await request(MASTER_URL, query)
     return result
-}
+};
 
 
 const getBusinessById = async (id) => {
@@ -92,13 +93,55 @@ const getBusinessById = async (id) => {
     `
     const result = await request(MASTER_URL, query)
     return result
+};
+
+
+const createNewBooking = async (businessId, date, time, userEmail, userName) => {
+    const mutationQuery = gql`
+        mutation CreateBooking {
+            createBooking(
+                data: {
+                    bookingStatus: booked,
+                    businessList: { connect: { id: "${businessId}" } },
+                    date: "${date}",
+                    time: "${time}",
+                    userEmail: "${userEmail}",
+                    userName: "${userName}"
+                }
+            ) {
+                id
+            }
+            publishManyBookingsConnection(to: PUBLISHED) {
+                aggregate {
+                    count
+                }
+            }
+        }
+    `
+
+    const result = await request(MASTER_URL, mutationQuery);
+    return result;
+};
+
+
+const BusinessBookedSlot=async()=>{
+    const query=gql`
+    query BusinessBookedSlot {
+        bookings(where: {id: "", date: ""}) {
+        date
+        time
+        }
+    }
+    `
+    const result = await request(MASTER_URL, mutationQuery);
+    return result;
 }
-
-
+ //3:30
 
 export default {
     getCategory,
     getAllBusinessList,
     getBusinessByCategory,
-    getBusinessById
+    getBusinessById,
+    createNewBooking
 }

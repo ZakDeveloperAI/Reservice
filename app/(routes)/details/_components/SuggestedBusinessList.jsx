@@ -35,7 +35,7 @@ function SuggestedBusinessList({business}) {
   return (
     <div className=''>
       
-      <BookingSection>
+      <BookingSection business={business}>
         <Button className='flex gap-2 w-full'>
           <NotebookPen/> BOOK APPOINTMENT
         </Button>

@@ -11,13 +11,18 @@ import {
   } from "@/components/ui/sheet"
 import { Calendar } from '@/components/ui/calendar'
 import { Button } from '@/components/ui/button';
-function BookingSection({children}) {
+import GlobalApi from '@/app/_services/GlobalApi';
+import { toast } from 'sonner';
+import { useSession } from 'next-auth/react';
+function BookingSection({children,business}) {
   
   const [date, setDate] = useState(new Date());
   const [timeSlot, setTimeSlot] = useState([]);
   const [selectedTime, setSelectedTime] = useState();
+  const {data}=useSession();
   useEffect(() => {
     getTime();
+    
   },[])
   const getTime = () => {
     const timeList = [];
@@ -42,7 +47,17 @@ function BookingSection({children}) {
   }
 
   const saveBooking = () => {
-    //continue from here
+    GlobalApi.createNewBooking(business.id,date,selectedTime,data.user.email,data.user.name)
+    .then(resp=>{
+      console.log(resp)
+      if(resp){
+        setDate();
+        setSelectedTime('');//faccio clear cosi prossima volta i valori tempo e data non sono uguali
+        toast('Servizio Prenotato Correttamente ✅')
+      }
+    },(e)=>{
+      toast('Errore Durante la Prenotazione ❌')
+    })
   }
     return (
     <div>
