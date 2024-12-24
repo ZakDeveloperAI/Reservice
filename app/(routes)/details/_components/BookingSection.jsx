@@ -15,15 +15,29 @@ import GlobalApi from '@/app/_services/GlobalApi';
 import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
 function BookingSection({children,business}) {
-  
   const [date, setDate] = useState(new Date());
   const [timeSlot, setTimeSlot] = useState([]);
   const [selectedTime, setSelectedTime] = useState();
+  const [bookedSlot,setBookedSlot]=useState([]);
   const {data}=useSession();
   useEffect(() => {
+    setDate(''); //fatto io empty al caledario prima di iniziare
     getTime();
     
   },[])
+
+  useEffect(()=>{
+    date&&BusinessBookedSlot();
+  },[date])
+
+  const BusinessBookedSlot=()=>{
+    GlobalApi.BusinessBookedSlot(business.id,date)
+    .then(resp=>{
+      console.log(resp);
+      setBookedSlot(resp.bookings)
+    })
+  }
+
   const getTime = () => {
     const timeList = [];
     for (let i = 10; i <= 12; i++) {
@@ -51,13 +65,17 @@ function BookingSection({children,business}) {
     .then(resp=>{
       console.log(resp)
       if(resp){
-        setDate();
+        setDate('');
         setSelectedTime('');//faccio clear cosi prossima volta i valori tempo e data non sono uguali
         toast('Servizio Prenotato Correttamente ✅')
       }
     },(e)=>{
       toast('Errore Durante la Prenotazione ❌')
     })
+  }
+
+  const isSlotBooked=(time)=>{
+    return bookedSlot.find(item=>item.time==time)
   }
     return (
     <div>
@@ -80,7 +98,8 @@ function BookingSection({children,business}) {
         <h2 className='my-5 font-bold'>Select Time Slot</h2>
         <div className='grid grid-cols-3 gap-3'>
             {timeSlot.map((item,index)=>(
-                <Button key={index}  variant='outline' 
+                <Button key={index}  variant='outline'
+                disabled={isSlotBooked(item.time)}
                 className={`border rounded-full p-2 px-3 hover:bg-primary hover:text-white
                 ${selectedTime==item.time && 'bg-primary text-white'}`}
                 onClick={() => setSelectedTime(item.time)}

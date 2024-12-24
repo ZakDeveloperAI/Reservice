@@ -124,18 +124,21 @@ const createNewBooking = async (businessId, date, time, userEmail, userName) => 
 };
 
 
-const BusinessBookedSlot=async()=>{
+const BusinessBookedSlot=async(businessId,date)=>{
     const query=gql`
     query BusinessBookedSlot {
-        bookings(where: {id: "", date: ""}) {
-        date
-        time
+        bookings(where: { 
+            businessList: { id: "${businessId}" }, 
+            date: "${date}" 
+        }) {
+            date
+            time
         }
     }
-    `
-    const result = await request(MASTER_URL, mutationQuery);
+`
+    const result = await request(MASTER_URL, query);
     return result;
-}
+};
  //3:30
 
 export default {
@@ -143,5 +146,6 @@ export default {
     getAllBusinessList,
     getBusinessByCategory,
     getBusinessById,
-    createNewBooking
+    createNewBooking,
+    BusinessBookedSlot
 }
