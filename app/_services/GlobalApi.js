@@ -1,50 +1,52 @@
-import { gql, request } from 'graphql-request'
+import { gql, request } from "graphql-request";
 
-const MASTER_URL = 'https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/' + process.env.NEXT_PUBLIC_MASTER_URL_KEY + '/master'
-
+const MASTER_URL =
+    "https://eu-central-1-shared-euc1-02.cdn.hygraph.com/content/" +
+    process.env.NEXT_PUBLIC_MASTER_URL_KEY +
+    "/master";
 
 const getCategory = async () => {
     const query = gql`
-        query Category {
-            categories {
-                bgcolor {
-                    hex
-                }
-                id
-                name
-                icon {
-                    url
-                }
-            }
+    query Category {
+      categories {
+        bgcolor {
+          hex
         }
-    `
+        id
+        name
+        icon {
+          url
+        }
+      }
+    }
+  `;
 
-    const result = await request(MASTER_URL, query)
-    return result
+    const result = await request(MASTER_URL, query);
+    return result;
 };
 
 const getAllBusinessList = async () => {
     const query = gql`
-        query BusinessList {
-            businessLists {
-                about
-                address
-                category {
-                    name
-                }
-                contactPerson
-                email
-                images {
-                    url
-                }
-                id
-                name
-            }
+    query BusinessList {
+      businessLists {
+        about
+        address
+        category {
+          name
         }
-    `
+        contactPerson
+        email
+        images {
+          url
+        }
+        id
+        name
+      }
+    }
+  `;
 
-    const result = await request(MASTER_URL, query)
-    return result
+    const result = await request(MASTER_URL, query);
+    return result;
 };
 
 const getBusinessByCategory = async (category) => {
@@ -65,17 +67,19 @@ const getBusinessByCategory = async (category) => {
                 }
             }
         }
-    `
+    `;
 
-    const result = await request(MASTER_URL, query)
-    return result
+    const result = await request(MASTER_URL, query);
+    return result;
 };
 
-
 const getBusinessById = async (id) => {
-    const query = gql`
+    const query =
+        gql`
         query GetBusinessById {
-            businessList(where: { id: "`+id+`" }) {
+            businessList(where: { id: "` +
+        id +
+        `" }) {
                 about
                 address
                 category {
@@ -90,13 +94,18 @@ const getBusinessById = async (id) => {
                 }
             }
         }
-    `
-    const result = await request(MASTER_URL, query)
-    return result
+    `;
+    const result = await request(MASTER_URL, query);
+    return result;
 };
 
-
-const createNewBooking = async (businessId, date, time, userEmail, userName) => {
+const createNewBooking = async (
+    businessId,
+    date,
+    time,
+    userEmail,
+    userName
+) => {
     const mutationQuery = gql`
         mutation CreateBooking {
             createBooking(
@@ -117,15 +126,14 @@ const createNewBooking = async (businessId, date, time, userEmail, userName) => 
                 }
             }
         }
-    `
+    `;
 
     const result = await request(MASTER_URL, mutationQuery);
     return result;
 };
 
-
-const BusinessBookedSlot=async(businessId,date)=>{
-    const query=gql`
+const BusinessBookedSlot = async (businessId, date) => {
+    const query = gql`
     query BusinessBookedSlot {
         bookings(where: { 
             businessList: { id: "${businessId}" }, 
@@ -135,11 +143,31 @@ const BusinessBookedSlot=async(businessId,date)=>{
             time
         }
     }
-`
+`;
     const result = await request(MASTER_URL, query);
     return result;
 };
- //3:30
+
+const GetUserBookingHistory = async (userEmail) => {
+    const query = gql`
+    query GetUserBookingHistory {
+        bookings(where: { userEmail: "${userEmail}" }) {
+        businessList {
+        name
+        images {
+            url
+        }
+        contactPerson
+        address
+        }
+        date
+        time
+        }
+    }
+    `;
+    const result = await request(MASTER_URL, query);
+    return result;
+};
 
 export default {
     getCategory,
@@ -147,5 +175,6 @@ export default {
     getBusinessByCategory,
     getBusinessById,
     createNewBooking,
-    BusinessBookedSlot
-}
+    BusinessBookedSlot,
+    GetUserBookingHistory
+};
