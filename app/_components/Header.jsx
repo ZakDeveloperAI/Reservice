@@ -27,7 +27,7 @@ function Header() {
         <Image src='/logo.svg' alt="logo" width={200} height={200} onClick={()=>window.location.href='/'} className='cursor-pointer'/>
 
             <div className='md:flex items-center gap-6 hidden'>
-                <h2 className=' hover:scale-105 hover:text-primary cursor-pointer'>Home</h2>
+            <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'./'}>Home</Link>
                 <h2 className=' hover:scale-105 hover:text-primary cursor-pointer'>Servizi</h2>
                 <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/mybooking'}>My Booking</Link>
                 <h2 className=' hover:scale-105 hover:text-primary cursor-pointer'>About Us</h2>
