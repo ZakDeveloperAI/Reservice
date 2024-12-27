@@ -170,6 +170,49 @@ const GetUserBookingHistory = async (userEmail) => {
     return result;
 };
 
+
+
+
+const createNewUtente = async (
+    userName,
+    userEmail,
+) => {
+    const mutationQuery = gql`
+    mutation CreateUtente {
+        createUtente(data: {name: "${userName}", email: "${userEmail}"}) {
+            id
+        }
+        publishManyUtentiConnection {
+            aggregate {
+                count
+            }
+        }
+    }
+    `;
+
+    const result = await request(MASTER_URL, mutationQuery);
+    return result;
+};
+
+const createNewBusiness = async (businessName,businessEmail,contactPerson,address,categoryId,phoneNumber) => {
+    const mutationQuery = gql`
+    mutation CreateBusiness {
+        createBusinessList(
+            data: {name: "${businessName}", email: "${businessEmail}", contactPerson: "${contactPerson}", address: "${address}", category: {connect: {id: "${categoryId}"}}, phoneNumber: ${phoneNumber}}
+        ) {
+            id
+        }
+        publishManyBusinessListsConnection {
+        aggregate {
+            count
+        }
+        }
+    }
+    `;
+    const result = await request(MASTER_URL, mutationQuery);
+    return result;
+};
+
 export default {
     getCategory,
     getAllBusinessList,
@@ -177,5 +220,7 @@ export default {
     getBusinessById,
     createNewBooking,
     BusinessBookedSlot,
-    GetUserBookingHistory
+    GetUserBookingHistory,
+    createNewUtente,
+    createNewBusiness
 };
