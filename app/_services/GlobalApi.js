@@ -213,6 +213,23 @@ const createNewBusiness = async (businessName,businessEmail,contactPerson,addres
     return result;
 };
 
+
+const getCategoryId=async(categoryName)=>{
+    const query=gql`
+        query getCategoryId {
+            category(where: {name: "${categoryName}"}) 
+            {
+                id
+            }
+}
+`;
+    const result = await request(MASTER_URL, query);
+    return result;
+};
+
+
+
+
 export default {
     getCategory,
     getAllBusinessList,
@@ -222,5 +239,6 @@ export default {
     BusinessBookedSlot,
     GetUserBookingHistory,
     createNewUtente,
-    createNewBusiness
+    createNewBusiness,
+    getCategoryId
 };
