@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const AboutUs = () => {
@@ -16,7 +17,7 @@ const AboutUs = () => {
             </div>
             <div className='flex flex-col gap-1 mt-7'>
                 <h2>Altre informazioni</h2>
-                <li> <a href = 'http://localhost:3000/contact'> Chi Siamo</a> </li>
+                <Link href={"./contact"} className='text-blue-900 cursor-pointer hover:text-blue-950'> Contatti </Link>
             </div>
         </div>
     )
