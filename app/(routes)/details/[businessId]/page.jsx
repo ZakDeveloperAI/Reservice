@@ -5,52 +5,53 @@ import React, { useEffect, useState } from 'react'
 import BusinessInfo from '../_components/BusinessInfo';
 import SuggestedBusinessList from '../_components/SuggestedBusinessList';
 import BusinessDescription from '../_components/BusinessDescription';
+import { use } from 'react';
 
-function BusinessDetail({params}) {
+function BusinessDetail({ params }) {
 
-    const {data,status} = useSession();
+    const { data, status } = useSession();
     const [business, setBusiness] = useState([]);
 
+    // Unwrap `params` using `React.use()`
+    const unwrappedParams = use(params);
 
-    useEffect(()=>{
-        params&&getbusinessById();//esego solo quando params non è null
-    },[params])//le quadre dicono che ogni volta che params subisce una variazione esegue il metodo
+    useEffect(() => {
+        if (unwrappedParams) getbusinessById(); // Only execute when `params` is not null
+    }, [unwrappedParams]); // Executes when `unwrappedParams` changes
 
-    useEffect(()=>{
-        checkUserAuth(); //le quadre servono cosi ripete solo una volta o quando il componente viene montato o smonatato
-    },[])
+    useEffect(() => {
+        checkUserAuth(); // Checks authentication on component mount
+    }, []);
 
-    const  getbusinessById=()=>{
-      GlobalApi.getBusinessById(params.businessId).then(resp=>{
-          setBusiness(resp.businessList);
-      }) //businessId deriva dalla cratella variabile [businessId]
-  }
-
-    const checkUserAuth=()=>{
-      if (status == "loading") {
-        return <div>Loading...</div>
+    const getbusinessById = () => {
+        GlobalApi.getBusinessById(unwrappedParams?.businessId).then(resp => {
+            setBusiness(resp.businessList);
+        });
     }
 
-    if (status == "unauthenticated") {
-        signIn('descope');
-    }
+    const checkUserAuth = () => {
+        if (status == "loading") {
+            return <div>Loading...</div>;
+        }
+
+        if (status == "unauthenticated") {
+            signIn('descope');
+        }
     }
 
-  return status == "authenticated" &&business&& (
-    <div className='py-8 md:py-20 px-10 md:px:36'>
-      <BusinessInfo business={business}/>
-      <div className='grid grid-cols-3 mt-16'>
-        <div className='col-span-3 md:col-span-2 order-last md:order-first'>
-          <BusinessDescription business={business}/>
+    return status == "authenticated" && business && (
+        <div className='py-8 md:py-20 px-10 md:px:36'>
+            <BusinessInfo business={business} />
+            <div className='grid grid-cols-3 mt-16'>
+                <div className='col-span-3 md:col-span-2 order-last md:order-first'>
+                    <BusinessDescription business={business} />
+                </div>
+                <div className=''>
+                    <SuggestedBusinessList business={business} />
+                </div>
+            </div>
         </div>
-        <div className=''>
-          <SuggestedBusinessList business={business}/>
-        </div>
-      </div>
-      
-    </div>
-  )
+    );
 }
 
-export default BusinessDetail
-
+export default BusinessDetail;

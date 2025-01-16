@@ -1,20 +1,24 @@
-"use client"
-
+'use client'
 import BusinessList from '@/app/_components/BusinessList';
 import GlobalApi from '@/app/_services/GlobalApi';
 import React, { useEffect, useState } from 'react';
+import { use } from "react";
 
 function BusinessByCategory({ params }) {
-  const [businessList, setBusinessList] = useState([]); // Corretto il destructuring da array
+  const [businessList, setBusinessList] = useState([]); 
+
+  // Unwrap the `params` Promise using `React.use()`
+  const unwrappedParams = use(params);
+
   useEffect(() => {
-    console.log(params);
-    if (params) getBusinessList(); // Controllo per verificare se params è definito
-  }, [params]);
+    console.log(unwrappedParams);
+    if (unwrappedParams) getBusinessList(); 
+  }, [unwrappedParams]);
 
   const getBusinessList = () => {
-    GlobalApi.getBusinessByCategory(params.category)
+    GlobalApi.getBusinessByCategory(unwrappedParams?.category)
       .then((resp) => {
-        setBusinessList(resp?.businessLists || []); // Aggiunto fallback a array vuoto in caso di dati mancanti
+        setBusinessList(resp?.businessLists || []); 
       })
       .catch((err) => {
         console.error("Errore durante il recupero della lista di business:", err);
@@ -22,8 +26,8 @@ function BusinessByCategory({ params }) {
   };
 
   return (
-    <div>
-      <BusinessList title={params.category} businessList={businessList} />
+    <div>    
+      <BusinessList title={unwrappedParams?.category} businessList={businessList} />
     </div>
   );
 }
