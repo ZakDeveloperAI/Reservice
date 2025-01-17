@@ -1,11 +1,15 @@
-"use client";
+import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 import React from 'react'
-import PartnersCreation from './_component/PartnersCreation'
 
 function page() {
   return (
-    <div>
-      <PartnersCreation/>
+    <div className='mt-5'>
+        <div className='flex w-full justify-between'>
+            <Button >Inizia Gratuitamente</Button>
+            <Image src={'/logo.svg'} width={200} height={200} alt='logo'/> 
+            <Button >dsdsdssdd</Button>
+        </div>
     </div>
   )
 }
