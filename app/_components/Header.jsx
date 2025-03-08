@@ -29,7 +29,7 @@ function Header() {
             <div className='md:flex items-center gap-6 hidden'>
             <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/'}>Home</Link>
                 <h2 className=' hover:scale-105 hover:text-primary cursor-pointer'>Servizi</h2>
-                <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/mybooking'}>My Booking</Link>
+                <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/mybooking'}>Le Mie Prenotazioni</Link>
                 <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/aboutus'}>About Us</Link>
             </div>
 
