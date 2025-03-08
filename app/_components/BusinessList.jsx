@@ -5,9 +5,9 @@ import React from 'react';
 
 function BusinessList({ businessList = [], title }) {
   return (
-    <div className='mt-5'>
-      <h2 className='font-bold text-[22px]'>{title}</h2>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5'>
+    <div className='mt-20'>
+      <h2 className='font-bold text-[22px] '>{title}</h2>
+      <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10'>
         {businessList.length > 0 ? (
           businessList.map((business) => (
             <Link href={'/details/' + business.id}
@@ -19,7 +19,7 @@ function BusinessList({ businessList = [], title }) {
                 alt={business.name || 'Business image'} // Fallback for alt text
                 width={500}
                 height={200}
-                className='h-[150px] md:h-[200px] object-cover rounded-lg'
+                className='h-[250px] md:h-[250px] object-cover rounded-lg'
               />
               <div className='flex flex-col items-baseline p-3 gap-1'>
                 <h2 className='p-1 bg-purple-200 text-primary rounded-full px-2 text-[12px] font-bold'>
