@@ -30,7 +30,7 @@ function CategorySideBar() {
         <h2 className='font-bold mb-3 text-lg text-primary'>Categories</h2>
         <div>
             {categoryList.map((category,index)=>(
-                <Link href={'/search/'+category.name} key={index} 
+                <Link href={'/searchCategory/'+category.name} key={index} 
                     className={` flex items-center gap-2 p-3 border rounded-lg mb-3 md:mr-10 cursor-pointer
                     hover:bg-purple-50 hover:text-primary hover:border-primary hover:shadow-md 
                     ${selectedCategory==category.name&&'border-primary text-primary shadow-md'}`}
