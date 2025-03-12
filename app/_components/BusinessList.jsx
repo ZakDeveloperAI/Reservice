@@ -5,14 +5,14 @@ import React from 'react';
 
 function BusinessList({ businessList = [], title }) {
   return (
-    <div className='mt-20'>
+    <div>
       <h2 className='font-bold text-[22px] '>{title}</h2>
-      <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10'>
+      <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10'>
         {businessList.length > 0 ? (
           businessList.map((business) => (
             <Link href={'/details/' + business.id}
               key={business.id || business.name} // Fallback to business.name if business.id doesn't exist
-              className='shadow-md rounded-lg hover:shadow-2xl cursor-pointer hover:shadow-primary hover:scale-105 transition-all ease-in-out'
+              className='shadow-md rounded-lg hover:shadow-2xl cursor-pointer hover:shadow-purple-300 hover:scale-105 transition-all ease-in-out'
             >
               <Image
                 src={business?.images?.[0]?.url || '/placeholder.png'} // Provide a fallback image if url is undefined
