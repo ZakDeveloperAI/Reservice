@@ -3,15 +3,21 @@ import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BookingHistoryList from "./_component/BookingHistoryList";
 import GlobalApi from "@/app/_services/GlobalApi";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 function MyBooking() {
 
-    const {data}=useSession();
+    const {data, status}=useSession();
     const [bookingHistory,setBookingHistory]=useState([]);
     useEffect(()=>{
         data&&GetUserBookingHistory();
     },[data])
+
+    useEffect(()=>{
+        checkUserAuth();
+    },[])
+
+
 
     //fetch user booking history
     const GetUserBookingHistory=()=>{
@@ -36,7 +42,18 @@ function MyBooking() {
         return result;
     };
     
-    return (
+    const checkUserAuth = () => {
+        if (status == "loading") {
+            return <div>Loading...</div>;
+        }
+
+        if (status == "unauthenticated") {
+            signIn('descope');
+        }
+    }
+
+    return status == "authenticated" && (
+       
         <div className="my-10 mx-5  md:mx-36">
             <h2 className="font-bold text-[20px] my-2">Le Mie Prenotazioni</h2>
             <Tabs defaultValue="booked" className="w-full">
