@@ -5,7 +5,7 @@ import React from 'react';
 
 function BusinessList({ businessList = [], title }) {
   return (
-    <div>
+    <div className='mt-16'>
       <h2 className='font-bold text-[22px] '>{title}</h2>
       <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10'>
         {businessList.length > 0 ? (
