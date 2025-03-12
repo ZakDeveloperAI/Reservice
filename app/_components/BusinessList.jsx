@@ -12,7 +12,7 @@ function BusinessList({ businessList = [], title }) {
           businessList.map((business) => (
             <Link href={'/details/' + business.id}
               key={business.id || business.name} // Fallback to business.name if business.id doesn't exist
-              className='shadow-md rounded-lg hover:shadow-2xl cursor-pointer hover:shadow-purple-300 hover:scale-105 transition-all ease-in-out'
+              className='shadow-md rounded-lg hover:shadow-sm cursor-pointer hover:shadow-purple-300 hover:scale-105 transition-all ease-in-out'
             >
               <Image
                 src={business?.images?.[0]?.url || '/placeholder.png'} // Provide a fallback image if url is undefined
@@ -27,7 +27,7 @@ function BusinessList({ businessList = [], title }) {
                 </h2>
                 <h2 className='font-bold text-lg'>{business.name || 'Business name unavailable'}</h2>
                 <h2 className='text-primary'>{business.contactPerson || 'No contact person available'}</h2>
-                <h2 className='font-gra-500 text-sm'>{business.address || 'No address available'}</h2>
+                <h2 className='font-gray-500 text-sm'>{business.address || 'No address available'}</h2>
                 <Button className="rounded-lg mt-3">Prenota ora!</Button>
               </div>
             </Link>
