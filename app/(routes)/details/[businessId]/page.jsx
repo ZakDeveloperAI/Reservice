@@ -48,7 +48,7 @@ function BusinessDetail({ params }) {
                 </div>
                 <div className=''>
                     <SuggestedBusinessList business={business} />
-                </div>
+                </div> 
             </div>
         </div>
     );
