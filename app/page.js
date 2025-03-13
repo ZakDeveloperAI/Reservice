@@ -33,7 +33,6 @@ export default function Home() {
   return (
     <div>
         <Hero/>
-
         <CategoryList categoryList={categoryList} />
         <BusinessList businessList={businessList} title={'Servizi del momento'}/>
 

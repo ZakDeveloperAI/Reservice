@@ -229,6 +229,28 @@ const getCategoryId=async(categoryName)=>{
 
 
 
+const getReviewsByBusinessId=async(businessId)=>{
+    const query=gql`
+        query getReviewsByBusinessId {
+            businessList(where: {id: "${businessId}"}) {
+            id
+            }
+            reviews {
+            id
+            title
+            stars
+            description {
+                text
+            }
+            }
+        }
+`;
+    const result = await request(MASTER_URL, query);
+    return result;
+};
+
+
+
 
 export default {
     getCategory,
@@ -240,5 +262,6 @@ export default {
     GetUserBookingHistory,
     createNewUtente,
     createNewBusiness,
-    getCategoryId
+    getCategoryId,
+    getReviewsByBusinessId,
 };
