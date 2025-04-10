@@ -1,12 +1,11 @@
 "use client"
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import Image from "next/image";
-import Hero from "./_components/Hero";
-import CategoryList from "./_components/CategoryList";
+import Hero from "./components/Hero";
+import CategoryList from "./components/CategoryList";
 import GlobalApi from "./_services/GlobalApi";
 import { useState,useEffect } from "react";
-import BusinessList from "./_components/BusinessList";
-
+import BusinessList from "./components/BusinessList";
 
 
 export default function Home() {
@@ -35,7 +34,6 @@ export default function Home() {
         <Hero/>
         <CategoryList categoryList={categoryList} />
         <BusinessList businessList={businessList} title={'Servizi del momento'}/>
-
     </div>
   );
 }

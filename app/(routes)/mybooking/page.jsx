@@ -54,20 +54,22 @@ function MyBooking() {
 
     return status == "authenticated" && (
        
-        <div className="my-10 mx-5  md:mx-36">
-            <h2 className="font-bold text-[20px] my-2">Le Mie Prenotazioni</h2>
-            <Tabs defaultValue="booked" className="w-full">
-                <TabsList className="w-full justify-start">
-                    <TabsTrigger value="booked">Prenotazioni Attive</TabsTrigger>
-                    <TabsTrigger value="completed">Prenotazioni Passate</TabsTrigger>
-                </TabsList>
-                <TabsContent value="booked">
-                    <BookingHistoryList bookingHistory={filterData('booked')}/>
-                </TabsContent>
-                <TabsContent value="completed">
-                    <BookingHistoryList bookingHistory={filterData('completed')}/>
-                </TabsContent>
-            </Tabs>
+        <div className="mx-4 sm:mx-10 md:mx-22 lg:mx-52">
+            <div className="max-w-[1400px] w-full mx-auto my-10 mx-5  md:mx-36">
+                <h2 className="font-bold text-3xl my-2">Le Mie Prenotazioni</h2>
+                <Tabs defaultValue="booked" className="w-full bg-gray-100 rounded-xl shadow-md">
+                    <TabsList className="w-full justify-start">
+                        <TabsTrigger value="booked">Prenotazioni Attive</TabsTrigger>
+                        <TabsTrigger value="completed">Prenotazioni Passate</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="booked">
+                        {filterData('booked') && filterData('booked').length > 0 && <BookingHistoryList bookingHistory={filterData('booked')} />}
+                    </TabsContent>
+                    <TabsContent value="completed">
+                        {filterData('completed') && filterData('completed').length > 0 && <BookingHistoryList bookingHistory={filterData('completed')} />}
+                    </TabsContent>
+                </Tabs>
+            </div>
         </div>
     );
 }

@@ -1,5 +1,6 @@
 "use client"
-import { Button } from '@/components/ui/button'
+
+import { Button } from '../../components/ui/button'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useEffect } from 'react'
@@ -10,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "../../components/ui/dropdown-menu"
 import Link from 'next/link'
 
 
@@ -22,20 +23,20 @@ function Header() {
   },[data])
 
   return (
-    <div className='p-5 shadow-sm flex justify-between'>
+    <div className='px-6 py-4 shadow-md flex justify-between'>
         <div className='flex items-center  gap-8'>        
         <Image src='/logo.svg' alt="logo" width={200} height={200} onClick={()=>window.location.href='/'} className='cursor-pointer'/>
 
             <div className='md:flex items-center gap-6 hidden'>
-            <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/'}>Home</Link>
-                <h2 className=' hover:scale-105 hover:text-primary cursor-pointer'>Servizi</h2>
-                <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/mybooking'}>Le Mie Prenotazioni</Link>
-                <Link className=' hover:scale-105 hover:text-primary cursor-pointer' href={'/aboutus'}>About Us</Link>
+            <Link className='font-medium hover:text-gray-700' href={'/'}>Home</Link>
+            <Link className='font-medium hover:text-gray-700' href={'/'}>Servizi</Link>
+            <Link className='font-medium hover:text-gray-700' href={'/mybooking'}>Le Mie Prenotazioni</Link>
+            <Link className='font-medium hover:text-gray-700' href={'/aboutus'}>About Us</Link>
             </div>
 
         </div>
         <div>
-          {data?.user?
+        {data?.user?
           
           <DropdownMenu>
   <DropdownMenuTrigger asChild>
@@ -46,7 +47,7 @@ function Header() {
           className='rounded-full cursor-pointer'       
           />
   </DropdownMenuTrigger>
-  <DropdownMenuContent>
+          <DropdownMenuContent className='bg-gray-50 shadow-md'>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuItem>
@@ -59,7 +60,7 @@ function Header() {
           
           
           :
-          <Button  onClick={()=>signIn('descope') }>Accedi / Registrati</Button>
+          <Button className='rounded-md border border-gray-300 bg-gray-50 text-gray-700 hover:bg-gray-100' onClick={()=>signIn('descope') }>Accedi / Registrati</Button>
           }
                 
         </div>

@@ -9,36 +9,40 @@ const AboutUs = () => {
     };
 
     return (
-        <div className='flex flex-row gap-10 lg:gap-48 max-md:flex-col max-md:mx-auto max-md:w-[90%]'>
-            <section className='flex flex-col gap-1 lg:w-[70%]'>
-                <h2 className='text-2xl mt-7 mb-5'>About us</h2>
-                <h3>About Reservice</h3>
-                <p>{content.about}</p>
-                <h4 className='mt-10'>Our solution to queue</h4>
-                <p>
-                    {content.solution}{' '}
-                    <a
-                        href="https://webgate.ec.europa.eu/odr/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-900 hover:text-blue-950"
-                    >
-                        Online Dispute Resolution (ODR)
-                    </a>
-                </p>
-            </section>
-            <aside className='flex flex-col gap-1 mt-7'>
-                <h2>Altre informazioni</h2>
-                <a
-                    href="./contact"
-                    className='text-blue-900 cursor-pointer hover:text-blue-950'
-                    aria-label="Vai alla pagina Contatti"
-                >
-                    Contatti
-                </a>
-            </aside>
+        <div className='mx-4 sm:mx-10 md:mx-22 lg:mx-52 p-6'>
+            <div className='max-w-[1400px] w-full mx-auto'>
+                <div className='flex flex-row gap-10 lg:gap-48 max-md:flex-col max-md:mx-auto max-md:w-[90%]'>
+                    <section className='flex flex-col gap-1 lg:w-[70%]'>
+                        <h2 className='text-4xl mt-7 mb-5'>About us</h2>
+                        <h3 className='text-2xl'>About Reservice</h3>
+                        <p>{content.about}</p>
+                        <h4 className='mt-10 text-2xl'>Our solution to queue</h4>
+                        <p>
+                            {content.solution}{' '}
+                            <a
+                                href="https://webgate.ec.europa.eu/odr/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600"
+                            >
+                                Online Dispute Resolution (ODR)
+                            </a>
+                        </p>
+                    </section>
+                    <aside className='flex flex-col gap-1 mt-7'>
+                        <h2 className='text-xl'>Altre informazioni</h2>
+                        <a
+                            href="./contact"
+                            className='text-blue-600 cursor-pointer'
+                            aria-label="Vai alla pagina Contatti"
+                        >
+                            Contatti
+                        </a>
+                    </aside>
+                </div>
+            </div>
         </div>
-    );
-};
+    )
+}
 
 export default AboutUs;

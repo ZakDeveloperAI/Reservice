@@ -64,6 +64,24 @@
       @apply border-border;
     }
     body {
-      @apply bg-background text-foreground;
+        @apply bg-background text-foreground;
     }
-  }
+    h1 {
+        @apply font-bold;
+    }
+    h2 {
+        @apply font-bold;
+    }
+    h3 {
+        @apply font-semibold;
+    }
+    h4 {
+        @apply font-medium;
+    }
+    p {
+        @apply text-gray-600;
+    }
+    a {
+        @apply text-blue-600;
+    }
+}
