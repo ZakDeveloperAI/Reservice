@@ -1,7 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
+import React from 'react'
 
-const Contact = () => {
+const contact = () => {
     return (
         <div className="mx-4 sm:mx-10 md:mx-22 lg:mx-52">
             <div className="flex flex-col items-center justify-start min-h-screen bg-white p-6 pt-12 max-w-[1400px] w-full mx-auto mb-20">
@@ -38,7 +37,7 @@ const Contact = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Contact;
+export default contact
