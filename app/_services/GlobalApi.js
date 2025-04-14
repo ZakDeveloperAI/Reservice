@@ -106,7 +106,8 @@ const createNewBooking = async (
     userEmail,
     userName
 ) => {
-    const mutationQuery = gql`
+    // Step 1: Create the booking (draft)
+    const createMutation = gql`
         mutation CreateBooking {
             createBooking(
                 data: {
@@ -120,16 +121,24 @@ const createNewBooking = async (
             ) {
                 id
             }
-            publishManyBookingsConnection(to: PUBLISHED) {
-                aggregate {
-                    count
-                }
+        }
+    `;
+
+    const createResult = await request(MASTER_URL, createMutation);
+    const bookingId = createResult.createBooking.id;
+
+    // Step 2: Publish the newly created booking
+    const publishMutation = gql`
+        mutation PublishBooking {
+            publishBooking(where: { id: "${bookingId}" }, to: PUBLISHED) {
+                id
             }
         }
     `;
 
-    const result = await request(MASTER_URL, mutationQuery);
-    return result;
+    await request(MASTER_URL, publishMutation);
+
+    return bookingId; // Return the ID of the published booking
 };
 
 const BusinessBookedSlot = async (businessId, date) => {
